@@ -20,7 +20,7 @@ export default function DataTable(props: IDataTableProps) {
                     {props.data.map((row: any, index: number) => (
                         <TableRow key={`row-${index}`}>
                             {row.data.map((val: any, innerIndex: number) => {
-                                <TableCell key={`cell-${innerIndex}`}>{val}</TableCell>
+                                return <TableCell key={`cell-${innerIndex}`}>{val}</TableCell>
                             })}
                         </TableRow>
                     ))}

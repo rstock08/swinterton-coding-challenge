@@ -11,7 +11,8 @@ export default function DisplayData() {
     const handleOnDrop = (data: any) => {
         console.log("Adding data...");
         console.log(data);
-        setCSVData(data);
+        const slicedData = data.slice(1,);
+        setCSVData(slicedData);
         setCSVHeaders(data[0].data);
     };
 
