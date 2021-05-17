@@ -3,39 +3,32 @@ import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
+import { Grid } from '@material-ui/core';
 import ChallengeDescription from './containers/ChallengeDescription';
 import DisplayData from './containers/DisplayData';
+import Navbar from './containers/Navbar';
 
 function App() {
   return (
     <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Challenge Description</Link>
-            </li>
-            <li>
-              <Link to="/data">Data</Link>
-            </li>
-          </ul>
-        </nav>
-
-        {/* A <Switch> looks through its children <Route>s and
-          renders the first one that matches the current URL. */}
-        <Switch>
-          <Route path="/data">
-            <DisplayData />
-          </Route>
-          <Route path="/">
-            <ChallengeDescription />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+      <Grid container>
+        <Grid item xs={12} >
+          <Navbar />
+        </Grid>
+        <Grid item xs={12} style={{ paddingTop: "4rem" }}>
+          <Switch>
+            <Route path="/data">
+              <DisplayData />
+            </Route>
+            <Route path="/">
+              <ChallengeDescription />
+            </Route>
+          </Switch>
+        </Grid>
+      </Grid>
+    </Router >
   );
 }
 
