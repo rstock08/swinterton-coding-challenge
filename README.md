@@ -1,3 +1,16 @@
+# Coding Challenge Description: 
+Challenge:
+Write a React app that lets you choose the attached CSV file from your computer and sum the values.
+The app should print out a single integer of the sum of all values.
+Example data can be found in /example-data folder as ExampleData1.csv or SampleData.csv
+
+Did For Fun:
+Created tables that show the data.
+Created tables that sum individual rows of the data.
+Created routes for different pages, one for the data analysis, and one for the challenge description.
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
