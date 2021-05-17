@@ -10,6 +10,7 @@ export default function DisplayData() {
     const [csvHeaders, setCSVHeaders] = useState([] as any[]);
     const [summedData, setSummedData] = useState([] as any[]);
     const [summedHeaders, setSummedHeaders] = useState([] as any[]);
+    const [totalSum, setTotalSum] = useState(0);
 
     const handleOnDrop = (data: any) => {
         console.log("Adding data...");
@@ -27,6 +28,7 @@ export default function DisplayData() {
 
             // Build array of size - assuming the first is always date time
             const sumArr: number[] = Array(headers.length - 1).fill(0);
+            let sum = 0;
 
             // Iterate over data to sum it and create the summation table data
             for (let i = 1; i < headers.length; i++) {
@@ -37,6 +39,7 @@ export default function DisplayData() {
                         // if (sumArr[i - 1]) {
                         //     sumArr[i - 1] = val;
                         // }
+                        sum += val;
                         sumArr[i - 1] += val;
                     }
                 }
@@ -46,6 +49,7 @@ export default function DisplayData() {
             setSummedHeaders(headers.slice(1,));
             setCSVData(rowData);
             setCSVHeaders(headers);
+            setTotalSum(sum);
         }
 
         else {
@@ -54,11 +58,18 @@ export default function DisplayData() {
             setSummedHeaders([] as any[]);
             setCSVData([] as any[]);
             setCSVHeaders([] as any[]);
+            setTotalSum(0);
         }
     };
 
     const handleOnError = (err: any, file: any, inputElem: any, reason: any) => {
         console.log(err);
+        console.log("Error - removing data...");
+        setSummedData([] as any[]);
+        setSummedHeaders([] as any[]);
+        setCSVData([] as any[]);
+        setCSVHeaders([] as any[]);
+        setTotalSum(0);
     };
 
     const handleOnRemoveFile = (data: any) => {
@@ -69,6 +80,7 @@ export default function DisplayData() {
         setSummedHeaders([] as any[]);
         setCSVData([] as any[]);
         setCSVHeaders([] as any[]);
+        setTotalSum(0);
     };
 
     return (
@@ -86,7 +98,7 @@ export default function DisplayData() {
             <Grid item xs={2} />
             <Grid item xs={8}>
                 {summedData.length > 0 && csvHeaders.length > 0 ? (
-                    <SummationTable data={summedData} headers={summedHeaders} />
+                    <SummationTable data={summedData} headers={summedHeaders} totalSum={totalSum} />
                 ) : (null)}
             </Grid>
             <Grid item xs={2} />

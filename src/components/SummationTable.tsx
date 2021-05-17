@@ -3,6 +3,7 @@ import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow
 interface ISummationTableProps {
     data: any[];
     headers: any[];
+    totalSum: number;
 }
 
 export default function SummationTable(props: ISummationTableProps) {
@@ -19,7 +20,7 @@ export default function SummationTable(props: ISummationTableProps) {
                 </TableHead>
                 <TableBody>
                     <TableRow>
-                        <TableCell />
+                        <TableCell>{props.totalSum}</TableCell>
                         {props.data.map((val: number, index: number) => {
                             return <TableCell key={`summation-cell-${index}`}>{val}</TableCell>
                         })}
