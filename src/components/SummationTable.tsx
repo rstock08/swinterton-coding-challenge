@@ -1,16 +1,17 @@
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
 
-interface IDataTableProps {
+interface ISummationTableProps {
     data: any[];
     headers: any[];
 }
 
-export default function DataTable(props: IDataTableProps) {
+export default function SummationTable(props: ISummationTableProps) {
     return (
         <TableContainer component={Paper} style={{ maxHeight: "30rem" }}>
             <Table stickyHeader size="small">
                 <TableHead>
                     <TableRow>
+                        <TableCell>Summations </TableCell>
                         {props.headers.map((col: any, index: number) => (
                             <TableCell key={`header-${index}`}>{col}</TableCell>
                         ))}
