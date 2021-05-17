@@ -9,6 +9,7 @@ export default function DisplayData() {
     const [csvData, setCSVData] = useState([] as any[]);
     const [csvHeaders, setCSVHeaders] = useState([] as any[]);
     const [summedData, setSummedData] = useState([] as any[]);
+    const [summedHeaders, setSummedHeaders] = useState([] as any[]);
 
     const handleOnDrop = (data: any) => {
         console.log("Adding data...");
@@ -19,23 +20,30 @@ export default function DisplayData() {
             const rowData = data.slice(1,);
 
             // Create dictionary from headers for summing values
-            let sumDict: any = {};
-            for (const key of headers) {
-                sumDict[key] = 0 as number;
-            }
+            // let sumDict: any = {};
+            // for (const key of headers) {
+            //     sumDict[key] = 0 as number;
+            // }
+
+            // Build array of size - assuming the first is always date time
+            const sumArr: number[] = Array(headers.length - 1).fill(0);
 
             // Iterate over data to sum it and create the summation table data
             for (let i = 1; i < headers.length; i++) {
                 for (let j = 0; j < rowData.length; j++) {
                     let val: number = parseInt(rowData[j].data[i]);
                     if (val) {
-                        sumDict[headers[i]] += val;
+                        // sumDict[headers[i]] += val; // Array is easier for mapping to table
+                        // if (sumArr[i - 1]) {
+                        //     sumArr[i - 1] = val;
+                        // }
+                        sumArr[i - 1] += val;
                     }
                 }
             }
-            console.log(sumDict);
-
-            setSummedData(sumDict);
+            console.log(sumArr);
+            setSummedData(sumArr);
+            setSummedHeaders(headers.slice(1,));
             setCSVData(rowData);
             setCSVHeaders(headers);
         }
@@ -43,6 +51,7 @@ export default function DisplayData() {
         else {
             console.log("No data to parse...");
             setSummedData([] as any[]);
+            setSummedHeaders([] as any[]);
             setCSVData([] as any[]);
             setCSVHeaders([] as any[]);
         }
@@ -57,13 +66,14 @@ export default function DisplayData() {
         console.log(data);
 
         setSummedData([] as any[]);
+        setSummedHeaders([] as any[]);
         setCSVData([] as any[]);
         setCSVHeaders([] as any[]);
     };
 
     return (
         <Grid container>
-            <Grid item xs={1} />
+            <Grid item xs={2} />
             <Grid item xs={4}>
                 <FolderBrowser
                     handleOnDrop={handleOnDrop}
@@ -71,23 +81,23 @@ export default function DisplayData() {
                     handleOnRemoveFile={handleOnRemoveFile}
                 />
             </Grid>
-            <Grid item xs={7} />
+            <Grid item xs={6} />
 
-            <Grid item xs={1} />
-            <Grid item xs={10}>
+            <Grid item xs={2} />
+            <Grid item xs={8}>
                 {summedData.length > 0 && csvHeaders.length > 0 ? (
-                    <SummationTable data={summedData} headers={csvHeaders} />
+                    <SummationTable data={summedData} headers={summedHeaders} />
                 ) : (null)}
             </Grid>
-            <Grid item xs={1} />
+            <Grid item xs={2} />
 
-            <Grid item xs={1} />
-            <Grid item xs={10}>
+            <Grid item xs={2} />
+            <Grid item xs={8}>
                 {csvData.length > 0 && csvHeaders.length > 0 ? (
                     <DataTable data={csvData} headers={csvHeaders} />
                 ) : (null)}
             </Grid>
-            <Grid item xs={1} />
+            <Grid item xs={2} />
 
         </Grid>
     )

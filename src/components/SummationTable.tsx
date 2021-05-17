@@ -11,20 +11,19 @@ export default function SummationTable(props: ISummationTableProps) {
             <Table stickyHeader size="small">
                 <TableHead>
                     <TableRow>
-                        <TableCell>Summations </TableCell>
+                        <TableCell>Summations</TableCell>
                         {props.headers.map((col: any, index: number) => (
-                            <TableCell key={`header-${index}`}>{col}</TableCell>
+                            <TableCell key={`summation-header-${index}`}>{col}</TableCell>
                         ))}
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {props.data.map((row: any, index: number) => (
-                        <TableRow key={`row-${index}`}>
-                            {row.data.map((val: any, innerIndex: number) => {
-                                return <TableCell key={`cell-${innerIndex}`}>{val}</TableCell>
-                            })}
-                        </TableRow>
-                    ))}
+                    <TableRow>
+                        <TableCell />
+                        {props.data.map((val: number, index: number) => {
+                            return <TableCell key={`summation-cell-${index}`}>{val}</TableCell>
+                        })}
+                    </TableRow>
                 </TableBody>
             </Table>
         </TableContainer>

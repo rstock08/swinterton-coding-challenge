@@ -10,7 +10,6 @@ interface IFolderBrowserProps {
 export default function FolderBrowser(props: IFolderBrowserProps) {
     return (
         <div>
-            <h5>Click ( No Drag ) Upload</h5>
             <CSVReader
                 onDrop={props.handleOnDrop}
                 onError={props.handleOnError}
