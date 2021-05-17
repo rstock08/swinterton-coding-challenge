@@ -7,7 +7,7 @@ import {
   Link
 } from "react-router-dom";
 import ChallengeDescription from './containers/ChallengeDescription';
-import FolderBrowser from './components/FolderBrowser';
+import DisplayData from './containers/DisplayData';
 
 function App() {
   return (
@@ -28,7 +28,7 @@ function App() {
           renders the first one that matches the current URL. */}
         <Switch>
           <Route path="/data">
-            <FolderBrowser />
+            <DisplayData />
           </Route>
           <Route path="/">
             <ChallengeDescription />
